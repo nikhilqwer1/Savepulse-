@@ -46,43 +46,7 @@ function getLocation(successCb, errorCb) {
     { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
   );
 }
-let peer;
-let localStream;
-let currentCall;
 
-function sosAlert() {
-  const el = document.getElementById('sosMsg');
-  el.innerText = '🆘 SOS activated — initializing video...';
-  
-  // 1. Show Video UI
-  document.getElementById('videoContainer').style.display = 'block';
-
-  // 2. Setup Peer
-  peer = new Peer(); 
-  peer.on('open', (id) => {
-    document.getElementById('peer-id').innerText = "Emergency ID: " + id;
-  });
-
-  // 3. Setup Camera
-  navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-    .then(stream => {
-      localStream = stream;
-      document.getElementById('localVideo').srcObject = stream;
-
-      // Auto-answer incoming calls
-      peer.on('call', call => {
-        currentCall = call;
-        call.answer(localStream);
-        call.on('stream', remoteStream => {
-          document.getElementById('remoteVideo').srcObject = remoteStream;
-        });
-      });
-    });
-
-  // Keep your existing location code here
-}
-
-function makeCall() {
   const remoteId = document.getElementById('remotePeerId').value;
   if(!remoteId) return alert("Enter an ID");
   
@@ -98,6 +62,65 @@ function endCall() {
     localStream.getTracks().forEach(track => track.stop());
   }
   document.getElementById('videoContainer').style.display = 'none';
+}
+let peer;
+let localStream;
+let currentCall;
+
+// Define the ID of the person/base station you want to call automatically
+const RECEIVER_ID = 'central-emergency-dispatch-001'; 
+
+async function startEmergencyCall() {
+    const el = document.getElementById('sosMsg');
+    el.innerText = '🆘 SOS active. Connecting to emergency services...';
+    
+    // 1. Show UI
+    document.getElementById('videoContainer').style.display = 'block';
+
+    // 2. Initialize Peer with a random ID for the sender
+    peer = new Peer(); 
+
+    try {
+        // 3. Get Camera Access
+        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        document.getElementById('localVideo').srcObject = localStream;
+
+        peer.on('open', (id) => {
+            console.log('My ID is: ' + id);
+            // 4. AUTOMATICALLY call the receiver ID
+            const call = peer.call(RECEIVER_ID, localStream);
+            handleCall(call);
+        });
+
+        // Also handle incoming calls in case the base station calls back
+        peer.on('call', (incomingCall) => {
+            incomingCall.answer(localStream);
+            handleCall(incomingCall);
+        });
+
+    } catch (err) {
+        el.innerText = "❌ Camera Error: " + err.message;
+    }
+
+    // Trigger location sharing as well
+    getLocation();
+}
+
+function handleCall(call) {
+    currentCall = call;
+    call.on('stream', (remoteStream) => {
+        const remoteVid = document.getElementById('remoteVideo');
+        remoteVid.srcObject = remoteStream;
+    });
+}
+
+function endCall() {
+    if (currentCall) currentCall.close();
+    if (localStream) {
+        localStream.getTracks().forEach(track => track.stop());
+    }
+    document.getElementById('videoContainer').style.display = 'none';
+    document.getElementById('sosMsg').innerText = 'Call ended.';
 }
   
 
