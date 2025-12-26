@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Smart Safety Alert System</title>
   <link rel="stylesheet" href="Sty.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<main>
 <!-- HERO -->
 <section class="hero">
   <h1>🚨 Smart Accident & SOS Alert System</h1>
   <p>Saving lives even without internet</p>
-  <button onclick="scrollToSection()">Explore Project</button>
+  <button type="button" onclick="scrollToSection()">Explore Project</button>
 </section>
 
 <!-- ABOUT -->
-<section class="section">
+<section class="section" id="about">
   <h2>📌 About Project</h2>
   <p>
     A smart device attached to cycle or bike that connects with a mobile phone.
@@ -36,8 +38,8 @@
       <li>Auto alert message</li>
       <li>Location shared instantly</li>
     </ul>
-    <button onclick="accidentAlert()">Simulate Accident</button>
-    <span id="accidentMsg"></span>
+    <button type="button" onclick="accidentAlert()">Simulate Accident</button>
+    <span id="accidentMsg" aria-live="polite" role="status"></span>
   </div>
 
   <div class="card sos">
@@ -48,8 +50,8 @@
       <li>Live location sharing</li>
       <li>Auto video call</li>
     </ul>
-    <button onclick="sosAlert()">Activate SOS</button>
-    <span id="sosMsg"></span>
+    <button type="button" onclick="sosAlert()">Activate SOS</button>
+    <span id="sosMsg" aria-live="polite" role="status"></span>
   </div>
 
 </section>
@@ -57,9 +59,10 @@
 <!-- LOCATION -->
 <section class="section location">
   <h2>📍 Live Location</h2>
-  <button onclick="getLocation()">Get My Location</button>
-  <p id="location"></p>
+  <button type="button" onclick="getLocation()">Get My Location</button>
+  <p id="location" aria-live="polite"></p>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer>
