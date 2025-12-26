@@ -12,67 +12,42 @@
 <body>
 
 <main>
-<!-- HERO -->
-<section class="hero">
-  <h1>🚨 Smart Accident & SOS Alert System</h1>
-  <p>Saving lives even without internet</p>
-  <button type="button" onclick="scrollToSection()">Explore Project</button>
-</section>
+<<main>
+  <section class="hero">
+    <h1>🚨 Smart Safety System</h1>
+    <p>Real-time Emergency Coordination</p>
+    <button type="button" onclick="scrollToSection()">Explore</button>
+  </section>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-  <h2>📌 About Project</h2>
-  <p>
-    A smart device attached to cycle or bike that connects with a mobile phone.
-    It automatically detects accidents and sends emergency alerts with live
-    location to family, police, and ambulance — even without network.
-  </p>
-</section>
-
-<!-- PHASES -->
-<section class="cards">
-
-  <div class="card">
-    <h3>⚙️ Phase 1</h3>
-    <p>Automatic Accident Detection</p>
-    <ul>
-      <li>Sensor based detection</li>
-      <li>Auto alert message</li>
-      <li>Location shared instantly</li>
-    </ul>
-    <button type="button" onclick="accidentAlert()">Simulate Accident</button>
-    <span id="accidentMsg" aria-live="polite" role="status"></span>
-  </div>
-
- <div class="card sos">
-  <h3>🆘 Phase 2</h3>
-  <p>SOS Emergency Mode</p>
-  <ul>
-    <li>Live location sharing</li>
-    <li>Instant Video Link</li>
-  </ul>
-  <button type="button" onclick="startEmergencyCall()">Activate SOS & Call</button>
-  <span id="sosMsg" aria-live="polite" role="status"></span>
-
-  <div id="videoContainer" style="display:none; margin-top: 20px;">
-    <div class="video-wrapper">
-      <video id="remoteVideo" autoplay playsinline></video>
-      <video id="localVideo" autoplay muted playsinline></video>
+  <section class="cards" id="about">
+    <div class="card">
+      <h3>⚙️ Phase 1</h3>
+      <p>Accident Detection</p>
+      <button type="button" onclick="accidentAlert()">Simulate Accident</button>
+      <span id="accidentMsg"></span>
     </div>
-    <div class="video-controls">
-      <button type="button" class="btn-end" onclick="endCall()">✖ End Emergency Call</button>
+
+    <div class="card sos">
+      <h3>🆘 Phase 2</h3>
+      <p>Instant SOS Video</p>
+      <button type="button" onclick="sosAlert()">Activate SOS</button>
+      <span id="sosMsg"></span>
     </div>
+  </section>
+
+  <div id="videoContainer" style="display:none; padding: 20px; text-align: center;">
+    <div class="video-grid">
+      <div class="video-item">
+        <p>Emergency Feed (Remote)</p>
+        <video id="remoteVideo" autoplay playsinline style="width:100%; background:#000;"></video>
+      </div>
+      <div class="video-item">
+        <p>My Camera (Local)</p>
+        <video id="localVideo" autoplay muted playsinline style="width:100%; background:#222;"></video>
+      </div>
+    </div>
+    <button onclick="endCall()" style="margin-top:20px; background:red; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer;">End Emergency Session</button>
   </div>
-</div>
-
-</section>
-
-<!-- LOCATION -->
-<section class="section location">
-  <h2>📍 Live Location</h2>
-  <button type="button" onclick="getLocation()">Get My Location</button>
-  <p id="location" aria-live="polite"></p>
-</section>
 </main>
 
 <!-- FOOTER -->
