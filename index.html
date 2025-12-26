@@ -49,40 +49,21 @@
   <p>SOS Emergency Mode</p>
   <ul>
     <li>Live location sharing</li>
-    <li>Auto video call</li>
+    <li>Instant Video Link</li>
   </ul>
-  <button type="button" onclick="sosAlert()">Activate SOS</button>
+  <button type="button" onclick="startEmergencyCall()">Activate SOS & Call</button>
   <span id="sosMsg" aria-live="polite" role="status"></span>
-  <div id="videoContainer" style="display:none; margin-top: 20px;">
-  <div class="video-wrapper">
-    <video id="remoteVideo" autoplay></video>
-    <video id="localVideo" autoplay muted></video>
-  </div>
-  <p id="peer-id" style="font-size: 0.7rem; margin: 10px 0; font-weight: bold;"></p>
 
-  <div class="video-controls">
-    <input type="text" id="remotePeerId" placeholder="Enter Contact ID">
-    <button type="button" class="btn-call" onclick="makeCall()">📞 Call</button>
-    <button type="button" class="btn-end" onclick="endCall()">✖</button>
-  </div>
-</div>
   <div id="videoContainer" style="display:none; margin-top: 20px;">
-  <p id="peer-id" style="font-size: 0.7rem; color: #ff4b2b; margin-bottom: 5px;"></p>
-  <div class="video-grid">
-    <video id="localVideo" autoplay muted></video>
-    <video id="remoteVideo" autoplay></video>
-  </div>
-  <input type="text" id="remotePeerId" placeholder="Enter Contact ID to Call" style="width: 100%; margin-top: 10px; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
-  <button type="button" onclick="makeCall()" style="background: #28a745; margin-top: 5px; width: 100%;">Connect to Contact</button>
-</div>
-
-  <div id="videoArea" style="display:none; margin-top:20px;">
-    <p id="my-id" style="font-size:12px; color:red;"></p>
-    <video id="localVideo" autoplay muted style="width:100%; border-radius:10px; background:#000;"></video>
-    <video id="remoteVideo" autoplay style="width:100%; border-radius:10px; margin-top:10px; background:#444;"></video>
+    <div class="video-wrapper">
+      <video id="remoteVideo" autoplay playsinline></video>
+      <video id="localVideo" autoplay muted playsinline></video>
+    </div>
+    <div class="video-controls">
+      <button type="button" class="btn-end" onclick="endCall()">✖ End Emergency Call</button>
+    </div>
   </div>
 </div>
-  
 
 </section>
 
