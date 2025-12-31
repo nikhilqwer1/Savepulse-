@@ -1,16 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background: #f5f7fb; color: #333; }
 
-body {
-  background: #f5f7fb;
-  color: #333;
-}
-
-/* HERO */
 .hero {
   height: 100vh;
   background: linear-gradient(135deg, #ff416c, #ff4b2b);
@@ -19,106 +9,38 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
-.hero h1 {
-  font-size: 3rem;
-}
-
-.hero button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 30px;
-  background: white;
-  color: #ff4b2b;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* SECTIONS */
-.section {
-  padding: 60px 10%;
-  text-align: center;
-}
-
-/* CARDS */
-.cards {
-  display: flex;
-  gap: 30px;
-  padding: 40px 10%;
-  flex-wrap: wrap;
-}
+.cards { display: flex; gap: 30px; padding: 40px 10%; justify-content: center; flex-wrap: wrap; }
 
 .card {
   background: white;
   padding: 25px;
   border-radius: 15px;
-  width: 300px;
+  width: 320px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
+  text-align: center;
 }
 
-.card:hover {
-  transform: translateY(-10px);
-}
-
-.card h3 {
-  margin-bottom: 10px;
-}
+.card.sos { background: #1d3557; color: white; }
 
 .card button {
-  padding: 10px;
   width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
   background: #ff4b2b;
   color: white;
-  border: none;
-  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
-}
-
-.card.sos {
-  background: linear-gradient(135deg, #1d3557, #457b9d);
-  color: white;
-}
-
-.card span {
-  display: block;
   margin-top: 10px;
-  font-size: 14px;
 }
 
-/* VIDEO GRID */
-.video-grid {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px;
-}
+.video-grid { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+.video-item { width: 45%; }
+video { width: 100%; background: #000; border-radius: 12px; border: 3px solid #ff4b2b; aspect-ratio: 4/3; }
+#localVideo { border-color: #fff; }
 
-.video-item {
-  width: 45%;
-}
+.end-btn { margin-top: 20px; background: #333; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; }
 
-video {
-  width: 100%;
-  background: #222;
-  border-radius: 10px;
-  border: 2px solid #ff4b2b;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-}
-
-#localVideo {
-  border-color: #ffffff;
-}
-
-/* FOOTER */
-footer {
-  background: #1d3557;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 40px;
-}
+footer { background: #1d3557; color: white; text-align: center; padding: 20px; }
