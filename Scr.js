@@ -1,5 +1,6 @@
 // --- Global Configurations ---
 const emergencyChannel = new BroadcastChannel('emergency_link');
+const EMERGENCY_CONTACT = "9162327765"; // Hardcoded emergency number
 let peer;
 let localStream;
 let currentCall;
@@ -29,28 +30,25 @@ async function sosAlert() {
     el.innerText = '🆘 Initializing Emergency Stream...';
 
     try {
-        // Get GPS and Camera first
         const pos = await new Promise((res, rej) => navigator.geolocation.getCurrentPosition(res, rej));
         localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 
-        // Show UI and Local Video
         document.getElementById('videoContainer').style.display = 'block';
         document.getElementById('localVideo').srcObject = localStream;
 
-        // Initialize PeerJS to get a unique ID
         peer = new Peer();
         peer.on('open', (id) => {
-            // BROADCAST: Tell all other tabs to call this ID
+            // BROADCAST: Send SOS signal with coordinates and contact number
             emergencyChannel.postMessage({
                 type: 'SOS_TRIGGERED',
                 peerId: id,
                 lat: pos.coords.latitude,
-                lon: pos.coords.longitude
+                lon: pos.coords.longitude,
+                contact: EMERGENCY_CONTACT
             });
-            el.innerText = '🆘 SOS Broadcasted. Waiting for Responder...';
+            el.innerText = `🆘 SOS Broadcasted to ${EMERGENCY_CONTACT}.`;
         });
 
-        // Answer the call when the responder connects
         peer.on('call', (call) => {
             currentCall = call;
             call.answer(localStream);
@@ -65,23 +63,22 @@ async function sosAlert() {
     }
 }
 
-// 4. Responder Logic (Receiver Logic - runs on the other tab)
+// 4. Responder Logic (Receiver)
 emergencyChannel.onmessage = (event) => {
     if (event.data.type === 'SOS_TRIGGERED') {
-        const { peerId, lat, lon } = event.data;
+        const { peerId, lat, lon, contact } = event.data;
         
-        // Update UI to show incoming alert
         const alertBox = document.getElementById('accidentMsg');
         alertBox.innerHTML = `
             <div style="background: #ff4b2b; color: white; padding: 10px; border-radius: 8px;">
                 <strong>🚨 INCOMING SOS!</strong><br>
+                <span>Target Contact: ${contact}</span><br>
                 <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank" style="color:yellow">📍 View Location</a>
             </div>`;
 
-        // Create responder peer to call the victim
         if (!peer) peer = new Peer();
         
-        const call = peer.call(peerId, null); // Responder watches, doesn't need to send video
+        const call = peer.call(peerId, null); 
         call.on('stream', (remoteStream) => {
             document.getElementById('videoContainer').style.display = 'block';
             document.getElementById('remoteVideo').srcObject = remoteStream;
@@ -90,5 +87,5 @@ emergencyChannel.onmessage = (event) => {
 };
 
 function endCall() {
-    location.reload(); // Resets everything
+    location.reload(); 
 }
