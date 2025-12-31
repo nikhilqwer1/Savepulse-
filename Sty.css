@@ -68,14 +68,6 @@ body {
   margin-bottom: 10px;
 }
 
-.card ul {
-  margin: 15px 0;
-}
-
-.card ul li {
-  font-size: 14px;
-}
-
 .card button {
   padding: 10px;
   width: 100%;
@@ -95,33 +87,22 @@ body {
   display: block;
   margin-top: 10px;
   font-size: 14px;
-  color: green;
 }
 
-/* LOCATION */
-.location button {
-  padding: 10px 20px;
-  border-radius: 20px;
-  background: #1d3557;
-  color: white;
-  border: none;
-}
-
-/* FOOTER */
-footer {
-  background: #1d3557;
-  color: white;
-  text-align: center;
-  padding: 15px;
-}
+/* VIDEO GRID */
 .video-grid {
   display: flex;
   gap: 10px;
   justify-content: center;
+  margin-top: 20px;
+}
+
+.video-item {
+  width: 45%;
 }
 
 video {
-  width: 48%;
+  width: 100%;
   background: #222;
   border-radius: 10px;
   border: 2px solid #ff4b2b;
@@ -130,49 +111,14 @@ video {
 }
 
 #localVideo {
-  border-color: #333; /* Different color for your own camera */
-}
-/* Video Container Styling */
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
+  border-color: #ffffff;
 }
 
-#remoteVideo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* FOOTER */
+footer {
+  background: #1d3557;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
 }
-
-#localVideo {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 80px;
-  height: 60px;
-  border: 2px solid white;
-  border-radius: 8px;
-  object-fit: cover;
-  z-index: 10;
-}
-
-.video-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-top: 10px;
-}
-
-.video-controls input {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.btn-call { background: #28a745 !important; color: white; }
-.btn-end { background: #dc3545 !important; color: white; }
-
